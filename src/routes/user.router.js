@@ -1,7 +1,7 @@
 import { Router } from "express";
 import UserManager from "../managers/user.manager.js";
 import { userValidator } from "../middlewares/user.validator.js";
-const userManager = new UserManager("./users.json");
+const userManager = new UserManager("src/data/users.json");
 
 const router = Router();
 
