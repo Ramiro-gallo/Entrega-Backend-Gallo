@@ -1,6 +1,7 @@
 import { Router } from "express";
 import UserManager from "../managers/user.manager.js";
 import { userValidator } from "../middlewares/user.validator.js";
+import { uploader } from "../middlewares/multer.js";
 const userManager = new UserManager("src/data/users.json");
 
 const router = Router();
@@ -28,6 +29,21 @@ router.post("/", [userValidator], async (req, res) => {
   try {
     const user = await userManager.createUser(req.body);
     res.status(201).json({ id: user.id, email: user.email });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.post("/upload-file", uploader.single("profile"), async (req, res) => {
+  try {
+    console.log(req.file);
+    const user = await userManager.createUser({
+      ...req.body,
+      profile: req.file.path,
+    });
+    res
+      .status(201)
+      .json({ id: user.id, email: user.email, profile: user.profile });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
