@@ -1,0 +1,11 @@
+{{#if usersArray.length}}
+{{#each usersArray}}
+    <p>Hola {{firstname}}!</p>
+    <p>Tu apellido es {{lastname}}.</p>
+    <p>Tienes {{age}} años.</p>
+    <p>Tu correo es {{mail}}.</p>
+    <p>Tu número de teléfono es {{phone}}.</p>
+{{/each}}
+{{else}}
+<p>No se encontraron usuarios :c</p>
+{{/if}}

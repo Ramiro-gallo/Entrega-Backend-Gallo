@@ -80,4 +80,13 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+router.post("/register", async (req, res)=>{
+  try {
+    await userManager.createUser(req.body);
+    res.redirect("/user");
+  } catch (error) {
+    res.render("error", { message: error.message });
+  }
+})
+
 export default router;
